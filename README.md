@@ -46,7 +46,7 @@ Node JS
 1. Clone the repo
 
 ```sh
-git clone https://github.com/diwash007/kurakani.git
+git clone https://github.com/Raghul-18/Let-s-Txt.git
 
 ```
 
