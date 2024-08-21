@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Footer from "@/components/Home/Footer";
 import LoginForm from "@/components/Home/LoginForm";
 import Navbar from "@/components/Home/Navbar";
