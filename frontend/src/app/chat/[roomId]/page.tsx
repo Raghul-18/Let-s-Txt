@@ -20,7 +20,7 @@ function Page() {
       roomId: roomId,
     });
     socket?.emit("join_room", roomId);
-  }, []);
+  }, [socket]);
 
   return (
     <div className="flex relative flex-col w-full h-screen">
