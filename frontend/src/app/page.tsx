@@ -21,7 +21,7 @@ export default function Home() {
           <LoginForm />
         </div>
         <div className="object-cover w-0 lg:w-1/2">
-          <img src="/images/hero.svg" alt="hero" />
+          <Image src="/images/hero.svg" alt="hero" />
         </div>
       </div>
       <Footer />
