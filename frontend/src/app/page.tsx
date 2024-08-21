@@ -10,19 +10,19 @@ export default function Home() {
       <div className="flex px-5 pt-36 pb-12 mb-12 lg:px-36">
         <div className="flex flex-col gap-8 w-full xl:pr-32 lg:w-1/2">
           <div className="flex flex-col gap-5">
-            <p className=" text-[72px] leading-[70px] lg:text-[90px] text-transparent font-medium lg:leading-[85px] tracking-tight bg-gradient bg-clip-text">
+            <p className="text-[72px] leading-[70px] lg:text-[90px] text-transparent font-medium lg:leading-[85px] tracking-tight bg-gradient bg-clip-text">
               Let&#39;s Txt
               <br /> anytime, anywhere
             </p>
             <p className="text-lg leading-7 text-gray-600">
-            Let&#39;s Txt makes it easy and fun to quickly chat with people all
+              Let&#39;s Txt makes it easy and fun to quickly chat with people all
               around the globe.
             </p>
           </div>
           <LoginForm />
         </div>
         <div className="object-cover w-0 lg:w-1/2">
-          <Image src="/images/hero.svg" alt="hero" />
+          <Image src="/images/hero.svg" alt="hero" layout="responsive" width={700} height={475} />
         </div>
       </div>
       <Footer />
