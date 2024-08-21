@@ -11,7 +11,7 @@ function Popup({
 }) {
   useEffect(() => {
     if (showPopup) setTimeout(() => setShowPopup(false), 3000);
-  }, [showPopup]);
+  }, [setShowPopup]);
   return (
     <div
       className={`absolute bottom-20 left-1/2 z-30 -translate-x-1/2 opacity-0 ${
