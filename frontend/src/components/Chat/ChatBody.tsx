@@ -17,7 +17,7 @@ function ChatBody({ roomId }: { roomId: string }) {
     socket?.on("typing_response", (data) => {
       setTyping(data);
     });
-  }, []);
+  }, [socket]);
 
   return (
     <div className="basis-[85%] overflow-y-scroll p-5 w-full flex flex-col gap-2">
