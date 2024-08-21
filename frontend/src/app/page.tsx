@@ -10,11 +10,11 @@ export default function Home() {
         <div className="flex flex-col gap-8 w-full xl:pr-32 lg:w-1/2">
           <div className="flex flex-col gap-5">
             <p className=" text-[72px] leading-[70px] lg:text-[90px] text-transparent font-medium lg:leading-[85px] tracking-tight bg-gradient bg-clip-text">
-              Let's Txt
+              Let&#39;s Txt
               <br /> anytime, anywhere
             </p>
             <p className="text-lg leading-7 text-gray-600">
-            Let's Txt makes it easy and fun to quickly chat with people all
+            Let&#39;s Txt makes it easy and fun to quickly chat with people all
               around the globe.
             </p>
           </div>
