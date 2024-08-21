@@ -30,7 +30,7 @@ export default function RoomProvider({
 
   useEffect(() => {
     updateMyRooms();
-  }, [myRooms]);
+  }, [updateMyRooms]);
 
   async function fetchRoomsfromServer(): Promise<void> {
     const response = await fetch(process.env.NEXT_PUBLIC_BASE_URL + "rooms");
