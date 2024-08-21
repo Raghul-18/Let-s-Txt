@@ -45,7 +45,7 @@ export default function SocketProvider({
     });
     socket.on("users_response", (data) => setRoomUsers(data));
     setSocket(socket);
-  }, [socket]);
+  }, [router, username]);
 
   return (
     <SocketContext.Provider value={{ socket, roomUsers, messages }}>
