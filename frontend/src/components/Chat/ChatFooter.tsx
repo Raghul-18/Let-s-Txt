@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { useSocket } from "@/contexts/SocketContext";
 import { useUser } from "@/contexts/UserContext";
 import React, { useRef, useState } from "react";
