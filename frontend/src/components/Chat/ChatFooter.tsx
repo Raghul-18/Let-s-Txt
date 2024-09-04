@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { useSocket } from "@/contexts/SocketContext";
 import { useUser } from "@/contexts/UserContext";
 import React, { useRef, useState } from "react";
@@ -77,7 +78,7 @@ function ChatFooter({ roomId }: { roomId: string }) {
     { image &&
       <div className="relative border border-primary rounded-lg max-w-[6rem] h-24 ml-4 mb-1">
         <IoMdCloseCircle size={20} className="absolute -right-2 -top-2 text-xs cursor-pointer text-red-600" onClick={() => setImage(null)}/>
-        <img src={image} className="w-full h-full object-contain"/>
+        <Image src={image} className="w-full h-full object-contain" alt="Uploaded Image" layout="fill" />
       </div>
     }
     <div className="basis-[8%] border-t-2 p-2 flex items-center gap-4">

@@ -15,12 +15,12 @@ function Page() {
   useEffect(() => {
     if (roomUsers[roomId]?.includes(socket?.id)) return;
     socket?.emit("send_message", {
-      text: username + " joined the room.",
+      text: `${username} joined the room.`,
       socketId: "kurakani",
       roomId: roomId,
     });
     socket?.emit("join_room", roomId);
-  }, []);
+  }, [roomId, roomUsers, socket, username]); // Added socket to dependency array
 
   return (
     <div className="flex relative flex-col w-full h-screen">

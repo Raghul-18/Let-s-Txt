@@ -17,7 +17,12 @@ function ChatBody({ roomId }: { roomId: string }) {
     socket?.on("typing_response", (data) => {
       setTyping(data);
     });
-  }, []);
+
+    // Cleanup to remove the listener when the component unmounts or socket changes
+    return () => {
+      socket?.off("typing_response");
+    };
+  }, [socket]); // Added socket to the dependency array
 
   return (
     <div className="basis-[85%] overflow-y-scroll p-5 w-full flex flex-col gap-2">
@@ -30,9 +35,11 @@ function ChatBody({ roomId }: { roomId: string }) {
           </div>
         ) : message.socketId === socket?.id ? (
           <div className="flex self-end flex-col items-end" key={index}>
-            {message.text && <div className="flex justify-center items-center px-3 py-1 text-white rounded-full rounded-br-none bg-primary">
-              <p className="font-sans">{message.text}</p>
-            </div>}
+            {message.text && (
+              <div className="flex justify-center items-center px-3 py-1 text-white rounded-full rounded-br-none bg-primary">
+                <p className="font-sans">{message.text}</p>
+              </div>
+            )}
             {message.image && <ChatImage imgURL={message.image} />}
           </div>
         ) : (
@@ -47,9 +54,15 @@ function ChatBody({ roomId }: { roomId: string }) {
             </div>
             <div>
               <p className="pl-2 text-sm align-bottom">{message.name}</p>
-              {message.text && <div className={`px-3 py-1 bg-gray-200 rounded-full ${message.image ? "rounded-bl-none" : "rounded-tl-none"} w-fit`}>
-                <p className="font-sans">{message.text}</p>
-              </div>}
+              {message.text && (
+                <div
+                  className={`px-3 py-1 bg-gray-200 rounded-full ${
+                    message.image ? "rounded-bl-none" : "rounded-tl-none"
+                  } w-fit`}
+                >
+                  <p className="font-sans">{message.text}</p>
+                </div>
+              )}
               {message.image && <ChatImage imgURL={message.image} />}
               <p className="py-2 pl-2 text-xs font-light">
                 {new Date(message.time).toLocaleTimeString([], {

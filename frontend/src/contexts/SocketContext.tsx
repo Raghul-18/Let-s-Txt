@@ -6,13 +6,13 @@ import * as socketIO from "socket.io-client";
 import { useUser } from "./UserContext";
 import { useRouter } from "next/navigation";
 
-const intialData: ISocketContext = {
+const initialData: ISocketContext = {
   socket: undefined,
   roomUsers: {},
   messages: {},
 };
 
-const SocketContext = createContext<ISocketContext>(intialData);
+const SocketContext = createContext<ISocketContext>(initialData);
 
 export function useSocket() {
   return useContext(SocketContext);
@@ -35,17 +35,25 @@ export default function SocketProvider({
       router.replace("/");
       return;
     }
-    let socket = socketIO.connect(process.env.NEXT_PUBLIC_BASE_URL!);
-    socket.on("receive_message", (data: IMessage) => {
+    
+    const socketInstance = socketIO.connect(process.env.NEXT_PUBLIC_BASE_URL!);
+
+    socketInstance.on("receive_message", (data: IMessage) => {
       setMessages((prev) => {
         const newMessages = { ...prev };
         newMessages[data.roomId] = [...(newMessages[data.roomId] ?? []), data];
         return newMessages;
       });
     });
-    socket.on("users_response", (data) => setRoomUsers(data));
-    setSocket(socket);
-  }, []);
+
+    socketInstance.on("users_response", (data) => setRoomUsers(data));
+
+    setSocket(socketInstance);
+
+    return () => {
+      socketInstance.disconnect();
+    };
+  }, [router, username]);
 
   return (
     <SocketContext.Provider value={{ socket, roomUsers, messages }}>

@@ -1,15 +1,15 @@
 "use client";
 import IRoom from "@/interfaces/IRoom";
 import IRoomContext from "@/interfaces/IRoomContext";
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState, useCallback } from "react";
 
-const intialData: IRoomContext = {
+const initialData: IRoomContext = {
   rooms: [],
   myRooms: [],
   setMyRooms: () => {},
 };
 
-const RoomContext = createContext<IRoomContext>(intialData);
+const RoomContext = createContext<IRoomContext>(initialData);
 
 export function useRoom() {
   return useContext(RoomContext);
@@ -24,15 +24,20 @@ export default function RoomProvider({
   const [myRooms, setMyRooms] = useState<IRoom[]>([]);
 
   useEffect(() => {
-    fetchRoomsfromServer();
+    fetchRoomsFromServer();
     fetchMyRooms();
   }, []);
 
-  useEffect(() => {
-    updateMyRooms();
+  // Memoize the updateMyRooms function
+  const updateMyRooms = useCallback(() => {
+    localStorage.setItem("myRooms", JSON.stringify(myRooms));
   }, [myRooms]);
 
-  async function fetchRoomsfromServer(): Promise<void> {
+  useEffect(() => {
+    updateMyRooms();
+  }, [updateMyRooms]);
+
+  async function fetchRoomsFromServer(): Promise<void> {
     const response = await fetch(process.env.NEXT_PUBLIC_BASE_URL + "rooms");
     const rooms = await response.json();
     setRooms(rooms);
@@ -42,10 +47,6 @@ export default function RoomProvider({
     const myRooms = localStorage.getItem("myRooms");
     if (myRooms) setMyRooms(JSON.parse(myRooms));
     else setMyRooms([]);
-  }
-
-  function updateMyRooms() {
-    localStorage.setItem("myRooms", JSON.stringify(myRooms));
   }
 
   return (
