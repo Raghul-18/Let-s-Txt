@@ -14,7 +14,7 @@ export default function Home() {
               <br /> anytime, anywhere
             </p>
             <p className="text-lg leading-7 text-gray-600">
-            Let's Txt makes it easy and fun to quickly chat with people all
+            Let&#39;s Txt makes it easy and fun to quickly chat with people all
               around the globe.
             </p>
           </div>
